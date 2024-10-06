@@ -3,8 +3,19 @@
   align-items: center;
   justify-content: center;
   height: 100%;
+  direction: rtl;
 }
 
 .innerWelcomeContainer {
+  direction: rtl;
   text-align: center;
+  h1
+  {
+    direction: rtl;
+  }
+  p
+  {
+    direction: rtl;
+  }
+
 }

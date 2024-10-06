@@ -21,15 +21,16 @@
 .messagePageHeaderNameContainer {
   display: flex;
   align-items: center;
+  gap: 10px;
   padding: 1rem 1.75rem;
 }
 
 .messageContentContainer {
-  padding-left: 3rem;
-  padding-right: 3rem;
+  padding-left: 0;
+  padding-right: 1rem;
   overflow-y: auto;
   background-color: rgb(243 244 246);
-  height: 66vh;
+  height: 73vh;
 }
 
 .messageContentInnerContainer {
@@ -39,20 +40,31 @@
 }
 
 .footerContainer {
-  background-color: #f0f2f5;
+  background-color: #fff;
+  direction: ltr;
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 13vh;
+  height: 100%;
+  padding: 8px 0;
 }
 
 .innerFooterContainer {
-  width: 70%;
+  width: 100%;
 }
-
+.InputContainer
+{
+  width: 98%;
+  outline: none;
+  border: none;
+  background-color: transparent;
+  direction: rtl;
+  height: 100%;
+  padding: 0 6px;
+}
 .emojiButton {
-  margin-right: 1rem;
+
 }
 
 .emojiOuterContainer {
@@ -61,8 +73,8 @@
 
 .emojiContainer {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-105%, -95.5%);
+  top: 70%;
+  left: 70%;
+  transform: translate(7%, -105.5%);
   z-index: 1;
 }

@@ -6,7 +6,7 @@ import SignUp from "./components/register/SignUp";
 
 function App() {
     return (
-        <div>
+        <div className="rtl">
             <Routes>
                 <Route path="/" element={<Homepage/>}/>
                 <Route path='/signin' element={<SignIn/>}/>

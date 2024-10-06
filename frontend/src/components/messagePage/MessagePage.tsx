@@ -17,6 +17,10 @@ import {TOKEN} from "../../config/Config";
 import EmojiPicker from "emoji-picker-react";
 import MoodIcon from '@mui/icons-material/Mood';
 import {EmojiClickData} from "emoji-picker-react/dist/types/exposedTypes";
+import {ReactComponent as Mic} from "../images/MessageCard/mic.svg";
+import {ReactComponent as Attach} from "../images/MessageCard/attach.svg";
+import AttachChooser from "../AttachChooser/AttachChooser";
+
 
 interface MessagePageProps {
     chat: ChatDTO;
@@ -40,6 +44,7 @@ const MessagePage = (props: MessagePageProps) => {
     const dispatch: AppDispatch = useDispatch();
     const open = Boolean(anchor);
     const token: string | null = localStorage.getItem(TOKEN);
+    const [attachOpen,setAttachOpen]=useState(false)
 
     useEffect(() => {
         scrollToBottom();
@@ -105,7 +110,7 @@ const MessagePage = (props: MessagePageProps) => {
     };
 
     const onOpenEmojiPicker = () => {
-        setIsEmojiPickerOpen(true);
+        setIsEmojiPickerOpen(!isEmojiPickerOpen);
     };
 
     const onCloseEmojiPicker = () => {
@@ -113,7 +118,7 @@ const MessagePage = (props: MessagePageProps) => {
     };
 
     const onEmojiClick = (e: EmojiClickData) => {
-        setIsEmojiPickerOpen(false);
+        // setIsEmojiPickerOpen(!isEmojiPickerOpen);
         props.setNewMessage(props.newMessage + e.emoji);
     };
 
@@ -132,6 +137,11 @@ const MessagePage = (props: MessagePageProps) => {
         return <MessageCard message={message} reqUser={props.reqUser} key={message.id} isNewDate={isNewDate}
                             isGroup={props.chat.isGroup}/>
     };
+    const handleAttach=()=>
+    {
+        setAttachOpen(!attachOpen)
+    }
+
 
     return (
         <div className={styles.outerMessagePageContainer}>
@@ -210,6 +220,11 @@ const MessagePage = (props: MessagePageProps) => {
             <div className={styles.footerContainer}>
                 {isEmojiPickerOpen ?
                     <div className={styles.emojiOuterContainer}>
+                        <div className={styles.emojiButton}>
+                            <IconButton onClick={onOpenEmojiPicker}>
+                                <MoodIcon/>
+                            </IconButton>
+                        </div>
                         <div className={styles.emojiContainer}>
                             <EmojiPicker onEmojiClick={onEmojiClick} searchDisabled={true} skinTonesDisabled={true}/>
                         </div>
@@ -219,11 +234,30 @@ const MessagePage = (props: MessagePageProps) => {
                             <MoodIcon/>
                         </IconButton>
                     </div>}
+                <IconButton onClick={props.onSendMessage}>
+                    {
+                        props.newMessage !== ""?
+                        <SendIcon style={{rotate:"180deg"}}/>:
+                        <Mic/>
+
+                    }
+
+                </IconButton>
+
                 <div className={styles.innerFooterContainer}>
-                    <TextField
+                    <input type="text"
+                           id='newMessage'
+                           placeholder="Enter new message ..."
+                           onKeyDown={onKeyDown}
+                           value={props.newMessage}
+                           onChange={onChangeNewMessage}
+                           className={styles.InputContainer}
+                    />
+
+                    {/*<TextField
                         id='newMessage'
                         type='text'
-                        label='Enter new message ...'
+                        placeholder='Enter new message ...'
                         size='small'
                         onKeyDown={onKeyDown}
                         fullWidth
@@ -233,12 +267,15 @@ const MessagePage = (props: MessagePageProps) => {
                         InputProps={{
                             endAdornment: (
                                 <InputAdornment position='end'>
-                                    <IconButton onClick={props.onSendMessage}>
-                                        <SendIcon/>
-                                    </IconButton>
+
                                 </InputAdornment>),
-                        }}/>
+                        }}/>*/}
                 </div>
+                <IconButton onClick={()=>handleAttach()}>
+                    <Attach/>
+                    <AttachChooser/>
+                </IconButton>
+
             </div>
         </div>
     );

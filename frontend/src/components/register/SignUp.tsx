@@ -9,11 +9,9 @@ import {currentUser, register} from "../../redux/auth/AuthAction";
 import {Button, TextField} from "@mui/material";
 
 
-// TODO: Verify email
-// TODO: Check if account already exists
-// TODO: Show error if something went wrong
-const SignUp = () => {
 
+const SignUp = () =>
+{
     const [createAccountData, setCreateAccountData] = useState<SignUpRequestDTO>({
         fullName: "",
         email: "",
@@ -64,51 +62,52 @@ const SignUp = () => {
                 <div className={styles.innerContainer}>
                     <form onSubmit={onSubmit}>
                         <div>
-                            <p className={styles.text}>Full Name</p>
+                            <p className={styles.text}>نام کامل</p>
                             <TextField
                                 className={styles.textInput}
                                 id="fullName"
                                 type="text"
-                                label="Enter your full name"
+                                placeholder="نام خود را وارد کنید"
                                 variant="outlined"
                                 onChange={onChangeFullName}
                                 value={createAccountData.fullName}/>
                         </div>
                         <div>
-                            <p className={styles.text}>Email</p>
+                            <p className={styles.text}>ایمیل</p>
                             <TextField
                                 className={styles.textInput}
                                 id="email"
                                 type="email"
-                                label="Enter your email"
+                                placeholder="ایمیل خود را وارد کنید"
                                 variant="outlined"
                                 onChange={onChangeEmail}
                                 value={createAccountData.email}/>
                         </div>
                         <div>
-                            <p className={styles.text}>Password</p>
+                            <p className={styles.text}>رمز عبور</p>
                             <TextField
                                 className={styles.textInput}
                                 id="password"
                                 type="password"
-                                label="Enter your password"
+                                placeholder="رمز عبور خود را وارد کنید"
                                 variant="outlined"
                                 onChange={onChangePassword}
                                 value={createAccountData.password}/>
                         </div>
                         <div className={styles.button}>
                             <Button
+                                style={{backgroundColor:"#3e4dce"}}
                                 fullWidth
                                 variant="contained"
                                 size="large"
                                 type="submit">
-                                Sign up
+                                ثبت نام
                             </Button>
                         </div>
                     </form>
                     <div className={styles.bottomContainer}>
-                        <p>Already signed up?</p>
-                        <Button variant='text' size='large' onClick={onNavigateToSignIn}>Login</Button>
+                        <p>قبلا ثبت نام کرده اید؟</p>
+                        <Button variant='text' size='large' onClick={onNavigateToSignIn}>ورود به حساب کاربری</Button>
                     </div>
                 </div>
             </div>

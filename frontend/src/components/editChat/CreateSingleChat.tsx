@@ -68,13 +68,13 @@ const CreateSingleChat = (props: CreateSingleChatProps) => {
     return (
         <div className={styles.createSingleChatOuterContainer}>
             <div className={styles.createSingleChatNavContainer}>
+                <h2>ایجاد گفت و گو جدید</h2>
                 <IconButton onClick={onHandleBack}>
                     <WestIcon fontSize='medium'/>
                 </IconButton>
-                <h2>Create New Chat</h2>
             </div>
             <div className={styles.createSingleChatTextContainer}>
-                <p className={styles.createSingleChatText}>Start chat with:</p>
+                <p className={styles.createSingleChatText}>شروع گفت و گو با:</p>
             </div>
             <div className={styles.createSingleChatSelectedUserContainer}>
                 {selectedUser && <GroupMember member={selectedUser} key={selectedUser.id}/>}
@@ -83,33 +83,41 @@ const CreateSingleChat = (props: CreateSingleChatProps) => {
                 <TextField
                     id='searchUser'
                     type='text'
-                    label='Search user to chat ...'
+                    label='جست و جوی جدید...'
                     size='small'
                     fullWidth
                     value={userQuery}
                     onChange={onChangeQuery}
-                    sx={{backgroundColor: 'white'}}
+                    sx={{ backgroundColor: 'white' }}
                     InputProps={{
                         startAdornment: (
-                            <InputAdornment position='start'>
-                                <SearchIcon/>
+                            <InputAdornment
+                                position='start'
+                                sx={{
+                                    marginRight: 0,
+                                    padding: 0
+                                }}
+                            >
+                                <SearchIcon />
                             </InputAdornment>
                         ),
                         endAdornment: getSearchEndAdornment(),
                     }}
                     InputLabelProps={{
                         shrink: focused || userQuery.length > 0,
-                        style: {marginLeft: focused || userQuery.length > 0 ? 0 : 30}
+                        style: { marginLeft: focused || userQuery.length > 0 ? 0 : 5 }, // Adjust margin between label and icon
                     }}
                     onFocus={() => setFocused(true)}
-                    onBlur={() => setFocused(false)}/>
+                    onBlur={() => setFocused(false)}
+                />
+
             </div>
             <div className={styles.createSingleChatUserContainer}>
                 {userQuery.length > 0 && authState.searchUser?.map(user =>
                     <GroupMember member={user} onAddMember={onSetUser} key={user.id}/>)}
             </div>
             <div className={styles.createSingleChatButton}>
-                <Button variant={"contained"} onClick={onCreate}>Create Chat</Button>
+                <Button variant={"contained"} onClick={onCreate}>ایجاد گفت و گوی جدید</Button>
             </div>
         </div>
     );

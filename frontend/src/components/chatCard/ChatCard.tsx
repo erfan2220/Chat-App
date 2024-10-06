@@ -41,12 +41,12 @@ const ChatCard = (props: ChatCardProps) => {
             </div>
             <div className={styles.chatCardContentContainer}>
                 <div className={styles.chatCardContentInnerContainer}>
-                    <p className={styles.chatCardLargeTextContainer}>{name}</p>
+                    <span className={styles.chatCardLargeTextContainer}>{name}</span>
                     <p className={styles.chatCardSmallTextContainer}>{lastDate}</p>
                 </div>
                 <div className={styles.chatCardContentInnerContainer}>
                     <p className={styles.chatCardSmallTextContainer}>{lastMessageString}</p>
-                    {<Badge badgeContent={numberOfUnreadMessages} color='primary' sx={{mr: '0.75rem'}}/>}
+                    {<Badge badgeContent={numberOfUnreadMessages} color='primary' sx={{ml: '0.75rem'}}/>}
                 </div>
             </div>
         </div>

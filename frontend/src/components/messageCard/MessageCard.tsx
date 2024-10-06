@@ -33,7 +33,7 @@ const MessageCard = (props: MessageCardProps) => {
     return (
         <div className={styles.messageCardInnerContainer}>
             {props.isNewDate && <div className={styles.date}>{<Chip label={dateLabel}
-                                                                    sx={{height: 'auto', width: 'auto', backgroundColor: '#faebd7'}}/>}</div>}
+                                                                    sx={{height: 'auto', width: 'auto', backgroundColor: '#d8dbf5'}}/>}</div>}
             <div className={isOwnMessage ? styles.ownMessage : styles.othersMessage}>
                 <Chip label={label}
                       sx={{height: 'auto', width: 'auto', backgroundColor: isOwnMessage ? '#d3fdd3' : 'white', ml: '0.75rem'}}/>

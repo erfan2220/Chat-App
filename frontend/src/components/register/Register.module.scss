@@ -3,6 +3,7 @@
   align-items: center;
   justify-content: center;
   height: 100vh;
+  direction: rtl;
 }
 
 .innerContainer {
@@ -25,6 +26,7 @@
 .button {
   margin-top: 16px;
   margin-bottom: 16px;
+  background-color: #3e4dce;
   width: 100%;
 }
 

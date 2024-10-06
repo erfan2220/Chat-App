@@ -6,7 +6,7 @@ import {AppDispatch, RootState} from "../redux/Store";
 import {TOKEN} from "../config/Config";
 import EditGroupChat from "./editChat/EditGroupChat";
 import Profile from "./profile/Profile";
-import {Avatar, Divider, IconButton, InputAdornment, Menu, MenuItem, TextField} from "@mui/material";
+import {Avatar, createTheme, Divider, IconButton, InputAdornment, Menu, MenuItem, TextField} from "@mui/material";
 import ChatIcon from '@mui/icons-material/Chat';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import {currentUser, logoutUser} from "../redux/auth/AuthAction";
@@ -25,9 +25,17 @@ import {Client, over, Subscription} from "stompjs";
 import {AUTHORIZATION_PREFIX} from "../redux/Constants";
 import CreateGroupChat from "./editChat/CreateGroupChat";
 import CreateSingleChat from "./editChat/CreateSingleChat";
+import rtlPlugin from 'stylis-plugin-rtl';
+import { CacheProvider } from '@emotion/react';
+import createCache from '@emotion/cache';
+import { create } from 'jss';
+import rtl from 'jss-rtl';
+import { StylesProvider, jssPreset } from '@mui/styles';
 
-const Homepage = () => {
 
+
+const Homepage = () =>
+{
     const authState = useSelector((state: RootState) => state.auth);
     const chatState = useSelector((state: RootState) => state.chat);
     const messageState = useSelector((state: RootState) => state.message);
@@ -147,8 +155,9 @@ const Homepage = () => {
         setMessageReceived(true);
     };
 
-    const onSendMessage = () => {
-        if (currentChat?.id && token) {
+    const onSendMessage = () =>
+    {
+        if (currentChat?.id && token && newMessage !=="") {
             dispatch(createMessage({chatId: currentChat.id, content: newMessage}, token));
             setNewMessage("");
         }
@@ -209,6 +218,25 @@ const Homepage = () => {
             </InputAdornment>
     };
 
+    const theme = createTheme({
+        direction: 'rtl',
+    });
+
+    const cacheRtl = createCache({
+        key: 'muirtl',
+        stylisPlugins: [rtlPlugin],
+    });
+
+    const jss = create({
+        plugins: [...jssPreset().plugins, rtl()],
+    });
+
+
+    function RTL(props:any) {
+        return <StylesProvider jss={jss}>{props.children}</StylesProvider>;
+    }
+
+
     return (
         <div>
             <div className={styles.outerContainer}>
@@ -242,18 +270,20 @@ const Homepage = () => {
                                         <IconButton onClick={onCreateSingleChat}>
                                             <ChatIcon/>
                                         </IconButton>
+
                                         <IconButton onClick={onOpenMenu}>
                                             <MoreVertIcon/>
                                         </IconButton>
+
                                         <Menu
                                             id="basic-menu"
                                             anchorEl={anchor}
                                             open={open}
                                             onClose={onCloseMenu}
                                             MenuListProps={{'aria-labelledby': 'basic-button'}}>
-                                            <MenuItem onClick={onOpenProfile}>Profile</MenuItem>
-                                            <MenuItem onClick={onCreateGroupChat}>Create Group</MenuItem>
-                                            <MenuItem onClick={onLogout}>Logout</MenuItem>
+                                            <MenuItem onClick={onOpenProfile}>پروفایل</MenuItem>
+                                            <MenuItem onClick={onCreateGroupChat}>ایجاد گروه جدید</MenuItem>
+                                            <MenuItem onClick={onLogout}>خروج</MenuItem>
                                         </Menu>
                                     </div>
                                 </div>
@@ -261,8 +291,8 @@ const Homepage = () => {
                                     <TextField
                                         id='search'
                                         type='text'
-                                        label='Search your chats ...'
                                         size='small'
+                                        placeholder="جست و جو..."
                                         fullWidth
                                         value={query}
                                         onChange={onChangeQuery}
@@ -273,14 +303,19 @@ const Homepage = () => {
                                                 </InputAdornment>
                                             ),
                                             endAdornment: getSearchEndAdornment(),
+                                            style: { paddingRight: '8px' },
                                         }}
                                         InputLabelProps={{
                                             shrink: focused || query.length > 0,
-                                            style: {marginLeft: focused || query.length > 0 ? 0 : 30}
+                                            style: {
+                                                marginRight: 0,
+                                                right:"75px"
+                                            }
                                         }}
-                                        onFocus={() => setFocused(true)}
-                                        onBlur={() => setFocused(false)}/>
+                                    />
+
                                 </div>
+
                                 <div className={styles.chatsContainer}>
                                     {query.length > 0 && chatState.chats?.filter(x =>
                                         x.isGroup ? x.chatName.toLowerCase().includes(query) :

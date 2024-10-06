@@ -9,7 +9,6 @@ import {Button, TextField} from "@mui/material";
 import styles from "./Register.module.scss";
 
 
-// TODO: Show error if something went wrong (like wrong mail/ pw)
 const SignIn = () => {
 
     const [signInData, setSignInData] = useState<LoginRequestDTO>({email: "", password: ""});
@@ -54,40 +53,41 @@ const SignIn = () => {
                 <div className={styles.innerContainer}>
                     <form onSubmit={onSubmit}>
                         <div>
-                            <p className={styles.text}>Email</p>
+                            <p className={styles.text}>ایمیل</p>
                             <TextField
                                 className={styles.textInput}
                                 id="email"
                                 type="email"
-                                label="Enter your email"
+                                placeholder="ایمیل خود را وارد کنید"
                                 variant="outlined"
                                 onChange={onChangeEmail}
                                 value={signInData.email}/>
                         </div>
                         <div>
-                            <p className={styles.text}>Password</p>
+                            <p className={styles.text}>رمز عبور</p>
                             <TextField
                                 className={styles.textInput}
                                 id="password"
                                 type="password"
-                                label="Enter your password"
+                                placeholder="پسورد خود را وارد کنید"
                                 variant="outlined"
                                 onChange={onChangePassword}
                                 value={signInData.password}/>
                         </div>
                         <div className={styles.button}>
                             <Button
+                                style={{backgroundColor:"#3e4dce"}}
                                 fullWidth
                                 variant="contained"
                                 size="large"
                                 type="submit">
-                                Sign in
+                                ورود
                             </Button>
                         </div>
                     </form>
                     <div className={styles.bottomContainer}>
-                        <p>Create new account</p>
-                        <Button variant='text' size='large' onClick={onClickCreateNewAccount}>Signup</Button>
+                        <p>حساب کاربری ندارید؟</p>
+                        <Button variant='text' size='large' onClick={onClickCreateNewAccount}>ثبت نام</Button>
                     </div>
                 </div>
             </div>

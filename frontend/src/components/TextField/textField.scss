@@ -1,0 +1,16 @@
+.TextFieldContainer
+{
+  width: 100%;
+  padding-left:0.75rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border: 1px solid #453d3d;
+
+  .inputStyle
+  {
+    outline: none;
+    border: none;
+    direction: rtl;
+  }
+}

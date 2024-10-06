@@ -1,3 +1,15 @@
+@font-face {
+  font-family: "iranSans2";
+  src:
+          local("iranSans2"),
+          url("./Font/eot/IRANSansWeb(FaNum).eot") format("eot"),
+          url("./Font/ttf/IRANSansWeb(FaNum).ttf") format("ttf"),
+          url("./Font/woff/IRANSansWeb(FaNum).woff") format("woff"),
+          url("./Font/woff2/IRANSansWeb(FaNum).woff2") format("woff2")
+}
+* {
+    font-family: "iranSans2", sans-serif;
+}
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
